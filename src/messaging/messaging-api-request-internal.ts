@@ -107,10 +107,12 @@ export class FirebaseMessagingRequestHandler {
     console.log('sendBatchRequest')
     return this.batchClient.send(requests)
       .then((responses: HttpResponse[]) => {
+        console.log('about to buildSendResponse', responses)
         return responses.map((part: HttpResponse) => {
           return this.buildSendResponse(part);
         });
       }).then((responses: SendResponse[]) => {
+        console.log('formatting final right response', responses)
         const successCount: number = responses.filter((resp) => resp.success).length;
         return {
           responses,

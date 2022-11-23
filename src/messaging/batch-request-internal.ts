@@ -75,6 +75,7 @@ export class BatchRequestClient {
       timeout: TEN_SECONDS_IN_MILLIS,
     };
     return this.httpClient.send(request).then((response) => {
+      console.log('http response', response)
       if (!response.multipart) {
         throw new FirebaseAppError(AppErrorCodes.INTERNAL_ERROR, 'Expected a multipart response.');
       }
