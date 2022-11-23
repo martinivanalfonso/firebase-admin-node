@@ -270,6 +270,7 @@ export class Messaging {
    *   send operation.
    */
   public sendAll(messages: Message[], dryRun?: boolean): Promise<BatchResponse> {
+    console.log('sendAll')
     if (validator.isArray(messages) && messages.constructor !== Array) {
       // In more recent JS specs, an array-like object might have a constructor that is not of
       // Array type. Our deepCopy() method doesn't handle them properly. Convert such objects to
@@ -305,6 +306,7 @@ export class Messaging {
             body: request,
           };
         });
+        console.log('about to sendBatchRequest')
         return this.messagingRequestHandler.sendBatchRequest(requests);
       });
   }
@@ -328,6 +330,7 @@ export class Messaging {
    *   send operation.
    */
   public sendMulticast(message: MulticastMessage, dryRun?: boolean): Promise<BatchResponse> {
+    console.log('sendMulticast')
     const copy: MulticastMessage = deepCopy(message);
     if (!validator.isNonNullObject(copy)) {
       throw new FirebaseMessagingError(
@@ -354,6 +357,7 @@ export class Messaging {
         fcmOptions: copy.fcmOptions,
       };
     });
+    console.log('about to sendAll')
     return this.sendAll(messages, dryRun);
   }
 

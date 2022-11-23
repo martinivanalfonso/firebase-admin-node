@@ -104,6 +104,7 @@ export class FirebaseMessagingRequestHandler {
    * @returns A promise that resolves when the send operation is complete.
    */
   public sendBatchRequest(requests: SubRequest[]): Promise<BatchResponse> {
+    console.log('sendBatchRequest')
     return this.batchClient.send(requests)
       .then((responses: HttpResponse[]) => {
         return responses.map((part: HttpResponse) => {
@@ -117,6 +118,7 @@ export class FirebaseMessagingRequestHandler {
           failureCount: responses.length - successCount,
         };
       }).catch((err) => {
+        console.log('sendBatchRequest err', err)
         if (err instanceof HttpError) {
           throw createFirebaseError(err);
         }
