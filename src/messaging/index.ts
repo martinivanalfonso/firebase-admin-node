@@ -93,6 +93,7 @@ export {
  *   app.
  */
 export function getMessaging(app?: App): Messaging {
+  console.log('getMessaging')
   if (typeof app === 'undefined') {
     app = getApp();
   }
